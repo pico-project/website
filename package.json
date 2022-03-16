@@ -1,19 +1,29 @@
 {
-  "name": "express-hello-world",
+  "name": "website",
   "version": "1.0.0",
-  "description": "Express Hello World on Render",
-  "main": "app.js",
-  "repository": "https://github.com/render-examples/express-hello-world",
-  "author": "Render Developers",
-  "license": "MIT",
-  "private": false,
+  "description": "Official site for the pico ads platform",
+  "main": "lib/app.js",
+  "repository": "https://github.com/pico-project/website",
+  "author": "Pico team",
+  "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node ./lib/index.js",
+    "watch": "tsc --watch",
+    "less-watch": "less-watch-compiler ./public/less ./public/css",
+    "dev": "nodemon ./lib/index.js"
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "body-parser": "^1.19.2",
+    "ejs": "^3.1.6",
+    "express": "^4.16.3",
+    "svelte-kit-cookie-session": "^2.1.2"
   },
   "engines": {
     "node": ">=14"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.21",
+    "nodemon": "^2.0.15"
   }
 }

@@ -1,6 +1,8 @@
 import bodyParser from "body-parser"
 import express from "express"
 import { join } from "path"
+import Session from "express-session"
+import pgStore from "connect-pg-simple"
 
 const PORT = process.env.PORT || 3400
 
@@ -17,6 +19,26 @@ app.set('trust proxy', 1)
 app.set("views", join(__dirname, "../views"))
 
 app.use(express.static(join(__dirname, "../public")))
+
+let SessionStore = pgStore(Session)
+
+let session = Session({
+    secret: "Q9tfjtBUwhbvL6yR5vw6",
+    saveUninitialized: false,
+    resave: true,
+    store: new SessionStore({
+        conString: "postgresql://postgres:daniel@ib.pico.com@db.mgagfxyjkutvmgdobsoe.supabase.co:5432/postgres"
+    })
+})
+
+app.use(session)
+
+app.use((req, _, next) => {
+    if (!("data" in req.session)) {
+        (req.session as any).data = { isSignIn: false, id: null }
+    }
+    next()
+})
 
 app.get("/", (req, res) => res.send({ message: "Welcome to pico" }));
 

@@ -3,6 +3,7 @@ import express from "express"
 import { join } from "path"
 import Session from "express-session"
 import pgStore from "connect-pg-simple"
+import api from "./api"
 
 const PORT = process.env.PORT || 3400
 
@@ -26,6 +27,9 @@ let session = Session({
     secret: "Q9tfjtBUwhbvL6yR5vw6",
     saveUninitialized: false,
     resave: true,
+    cookie: {
+        maxAge: 157788000000
+    },
     store: new SessionStore({
         conString: "postgresql://postgres:daniel@ib.pico.com@db.mgagfxyjkutvmgdobsoe.supabase.co:5432/postgres"
     })

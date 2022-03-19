@@ -4,6 +4,7 @@ import { join } from "path"
 import Session from "express-session"
 import pgStore from "connect-pg-simple"
 import api from "./api"
+import clientScripts from "./client"
 
 const PORT = process.env.PORT || 3400
 
@@ -44,6 +45,13 @@ app.use((req, _, next) => {
     next()
 })
 
-app.get("/", (req, res) => res.send({ message: "Welcome to pico" }));
+app.get("/", (req, res) => {
+    let session:{isSignIn: false, id: null|string } = (req.session as any).data
+    if (!session.isSignIn) {
+        res.json({ message: "welcome" })
+    } else {
+        res.json({ message: "index" })
+    }
+})
 
 app.listen(PORT, () => console.log(`Pico website app listening on port ${PORT}!`))

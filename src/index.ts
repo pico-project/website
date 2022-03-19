@@ -45,6 +45,8 @@ app.use((req, _, next) => {
     next()
 })
 
+app.use("/client", clientScripts)
+
 app.use("/api", api)
 
 app.get("/", (req, res) => {

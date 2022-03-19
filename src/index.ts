@@ -45,6 +45,8 @@ app.use((req, _, next) => {
     next()
 })
 
+app.use("/api", api)
+
 app.get("/", (req, res) => {
     let session:{isSignIn: false, id: null|string } = (req.session as any).data
     if (!session.isSignIn) {

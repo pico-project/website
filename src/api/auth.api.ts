@@ -8,7 +8,8 @@ interface SignUpApiBodyData {
     password: string
     firstName: string
     lastName: string
-    birthday: string
+    birthday: string,
+    country: string
 }
 
 auth.post("/verify/:access_token",  async (req, res) => {
@@ -77,8 +78,10 @@ auth.post("/signup", async (req, res) => {
         password,
         firstName,
         lastName,
-        birthday
+        birthday,
+        country
     } = req.body as  SignUpApiBodyData
+    country = country.toLowerCase()
     const userData = await supabase
         .from("users")
         .select("email_confirmed_at")
@@ -96,7 +99,7 @@ auth.post("/signup", async (req, res) => {
                 .json({ status: 200, message: "Waiting for verification" })
         }
     } else {
-        const { error } = await supabase.auth.signUp({ email, password }, { data: { "first_name": firstName, "last_name": lastName, birthday } })
+        const { error } = await supabase.auth.signUp({ email, password }, { data: { "first_name": firstName, "last_name": lastName, birthday, country } })
         if (error != null || error != undefined) {
             res
                 .status(400)

@@ -49,6 +49,8 @@ app.use("/client", clientScripts)
 
 app.use("/api", api)
 
+app.get("/verify", (_, res) => res.render("verify"))
+
 app.get("/", (req, res) => {
     let session:{isSignIn: false, id: null|string } = (req.session as any).data
     if (!session.isSignIn) {

@@ -19,7 +19,8 @@
     "connect-pg-simple": "^7.0.0",
     "ejs": "^3.1.6",
     "express": "^4.16.3",
-    "express-session": "^1.17.2"
+    "express-session": "^1.17.2",
+    "moment": "^2.29.1"
   },
   "engines": {
     "node": ">=14"

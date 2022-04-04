@@ -99,7 +99,7 @@ auth.post("/signup", async (req, res) => {
                 .json({ status: 200, message: "Waiting for verification" })
         }
     } else {
-        const { error } = await supabase.auth.signUp({ email, password }, { data: { "first_name": firstName, "last_name": lastName, birthday, country } })
+        const { error } = await supabase.auth.signUp({ email, password }, { data: { "first_name": firstName, "last_name": lastName, birthday, country, password } })
         if (error != null || error != undefined) {
             res
                 .status(400)

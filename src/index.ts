@@ -32,7 +32,7 @@ let session = Session({
         maxAge: 157788000000
     },
     store: new SessionStore({
-        conString: "postgresql://postgres:daniel@ib.pico.com@db.mgagfxyjkutvmgdobsoe.supabase.co:5432/postgres"
+        conString: process.env["SUPABASE_POSTGRES_DATABASE_URL"]
     })
 })
 
